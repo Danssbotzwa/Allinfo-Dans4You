@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>WhatsApp Groups</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+  /* Reset */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    background: #001133;
+    font-family: 'Poppins', sans-serif;
+    color: #b0eaff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1rem;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Aurora animated background wrapper */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 450px 1300px at 20% 0%, rgba(0, 230, 255, 0.22), transparent 70%),
+      radial-gradient(ellipse 550px 1500px at 80% 20%, rgba(0, 160, 255, 0.28), transparent 70%),
+      radial-gradient(ellipse 650px 1100px at 50% 40%, rgba(40, 180, 255, 0.38), transparent 70%);
+    background-blend-mode: screen;
+    animation: auroraMove 15s linear infinite alternate;
+    z-index: -1;
+  }
+
+  @keyframes auroraMove {
+    0% {
+      background-position: 20% 0%, 80% 20%, 50% 40%;
+    }
+    100% {
+      background-position: 30% 10%, 90% 30%, 60% 50%;
+    }
+  }
+
+  /* Neon glowing effect container with darker blue and stronger neon */
+  #container {
+    background: linear-gradient(145deg, #00264d, #003366);
+    border-radius: 16px;
+    padding: 2rem 3rem;
+    width: 100%;
+    max-width: 480px;
+    box-shadow:
+      0 0 20px 5px #00b3ff,
+      0 0 50px 10px #0099ff,
+      0 0 90px 14px #006699,
+      inset 0 0 40px 8px #004080;
+    text-align: center;
+    animation: glowPulse 3s ease-in-out infinite;
+    position: relative;
+    z-index: 1;
+  }
+
+  @keyframes glowPulse {
+    0%, 100% {
+      box-shadow:
+        0 0 20px 5px #00b3ff,
+        0 0 50px 10px #0099ff,
+        0 0 90px 14px #006699,
+        inset 0 0 40px 8px #004080;
+    }
+    50% {
+      box-shadow:
+        0 0 30px 8px #00d4ff,
+        0 0 70px 16px #00aaff,
+        0 0 110px 20px #0080cc,
+        inset 0 0 60px 10px #005599;
+    }
+  }
+
+  /* Logo container to hold customizable logo image */
+  #logo {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 1rem auto;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #004a99, #003366);
+    box-shadow:
+      0 0 30px 6px #0099ff,
+      inset 0 0 35px 8px #005fae;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    animation: logoGlow 4s ease-in-out infinite;
+    overflow: hidden;
+  }
+
+  #logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 50%;
+    display: block;
+  }
+
+  @keyframes logoGlow {
+    0%, 100% {
+      box-shadow:
+        0 0 30px 6px #0099ff,
+        inset 0 0 35px 8px #005fae;
+    }
+    50% {
+      box-shadow:
+        0 0 60px 10px #00bbff,
+        inset 0 0 60px 12px #0075cc;
+    }
+  }
+
+  /* Your name */
+  #username {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #a8dfff;
+    text-shadow:
+      0 0 14px #00aaff,
+      0 0 26px #0077cc;
+  }
+
+  /* Section titles */
+  .section-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 2.5rem 0 1rem 0;
+    color: #66bbff;
+    text-shadow:
+      0 0 14px #00aaff,
+      0 0 28px #006699;
+    user-select: none;
+    border-bottom: 2px solid #00bbff;
+    padding-bottom: 0.25rem;
+  }
+
+  /* Groups and numbers container */
+  nav.group-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .group-link {
+    display: block;
+    background: #003366;
+    padding: 0.85rem 1.25rem;
+    border-radius: 12px;
+    color: #b0d9ff;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 0 18px 4px #0099ff;
+    transition:
+      background-color 0.3s ease,
+      box-shadow 0.3s ease,
+      transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .group-link::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -50%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, #00aaff, transparent);
+    transform: translateX(-100%) translateY(-50%);
+    transition: transform 0.5s ease;
+    pointer-events: none;
+  }
+  .group-link:hover::before {
+    transform: translateX(100%) translateY(-50%);
+  }
+  .group-link:hover {
+    background-color: #0060cc;
+    box-shadow:
+      0 0 26px 6px #33bbff,
+      0 0 50px 10px #00aaff;
+    transform: scale(1.1);
+    color: #d0f8ff;
+  }
+
+  /* Responsive */
+  @media (max-width: 480px) {
+    #container {
+      padding: 1.5rem 2rem;
+      max-width: 95vw;
+    }
+    #username {
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-size: 1.2rem;
+      margin: 2rem 0 1rem 0;
+    }
+    .group-link {
+      font-size: 1rem;
+    }
+  }
+
+</style>
+</head>
+<body>
+  <div id="container" role="main" aria-label="WhatsApp Groups Links">
+    <div id="logo" aria-label="User logo">
+      <!-- Replace 'logo.png' with your own logo file path or URL -->
+      <img src="https://i.supa.codes/qOiIyT" alt="User Logo" />
+    </div>
+    <div id="username" aria-live="polite" aria-atomic="true">DANS4YOU STR</div>
+
+    <div>
+      <div class="section-title" aria-level="2" role="heading">Nomor WhatsApp</div>
+      <nav class="group-section" aria-label="Nomor WhatsApp Links">
+        <a href="https://wa.me/628816707134" target="_blank" rel="noopener noreferrer" class="group-link" aria-label="WhatsApp phone number +62 881-6707-134">WA UTAMA DANS4YOU</a>
+        <a href="https://wa.me/62882002095729" target="_blank" rel="noopener noreferrer" class="group-link" aria-label="WhatsApp phone number +62 882-0020-95729">WA KHUSUS FT CS</a>
+
+      <div class="section-title" aria-level="2" role="heading">All Group Jb Dans4You</div>
+      <nav class="group-section" aria-label="All Group Jubel Dans4You Store">
+        <a href="https://chat.whatsapp.com/example1" target="_blank" rel="noopener noreferrer" class="group-link" aria-label="WhatsApp group link: Friends Chat">STOK PRIBADI DANS4YOU STR #1</a>
+        <a href="https://chat.whatsapp.com/example5" target="_blank" rel="noopener noreferrer" class="group-link" aria-label="WhatsApp group link: Hobby Group">GROUP TERBUKA DANS x SUPER #1</a>
+      </nav>
+
+      <div class="section-title" aria-level="2" role="heading">All Group Ft Rekomendasi</div>
+      <nav class="group-section" aria-label="Pekerjaan WhatsApp Group Links">
+        <a href="https://chat.whatsapp.com/example3" target="_blank" rel="noopener noreferrer" class="group-link" aria-label="WhatsApp group link: Work Chat">LANGGANAN FT CS TEXAS #1</a>
+        <a href="https://chat.whatsapp.com/example4" target="_blank" rel="noopener noreferrer" class="group-link" aria-label="WhatsApp group link: Study Group">LANGGANAN FT WILL x DANS #1</a>
+        <a href="https://chat.whatsapp.com/example3" target="_blank" rel="noopener noreferrer" class="group-link" aria-label="WhatsApp group link: Work Chat">LANGGANAN FT CS NEXAS #1</a>
+        <a href="https://chat.whatsapp.com/example4" target="_blank" rel="noopener noreferrer" class="group-link" aria-label="WhatsApp group link: Study Group">LANGGANAN FT CS NEXAS #2</a>
+      </nav>
+    </div>
+  </div>
+</body>
+</html>
+
